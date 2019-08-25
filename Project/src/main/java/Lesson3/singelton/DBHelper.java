@@ -1,6 +1,4 @@
-package singelton;
-
-import java.util.Date;
+package Lesson3.singelton;
 
 public class DBHelper {
     private static volatile DBHelper dbHelper;

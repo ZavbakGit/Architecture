@@ -1,4 +1,4 @@
-package factory;
+package Lesson3.factory;
 
 public class FactoryMeat implements IFactoryMeat {
     public IMeat getMeat(MeatEnum meatEnum) {

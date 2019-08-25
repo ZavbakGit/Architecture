@@ -1,4 +1,4 @@
-package builder;
+package Lesson3.builder;
 
 public class DepartmentBuilder {
     private Department department;

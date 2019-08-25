@@ -1,4 +1,4 @@
-package prototype;
+package Lesson3.prototype;
 
 public class Circle implements Cloneable{
     int x;

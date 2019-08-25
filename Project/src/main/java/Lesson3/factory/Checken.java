@@ -1,4 +1,4 @@
-package factory;
+package Lesson3.factory;
 
 public class Checken implements IMeat {
     public String getType() {

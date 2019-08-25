@@ -1,4 +1,4 @@
-package factory;
+package Lesson3.factory;
 
 public interface ICoctail extends IFood {
     String getGlass();

@@ -1,4 +1,4 @@
-package factory;
+package Lesson3.factory;
 
 public class FactoryCoctail implements IFactoryCoctail {
     public ICoctail getCoctail(CoctailEnum coctailEnum) {

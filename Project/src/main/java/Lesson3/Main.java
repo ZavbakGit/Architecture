@@ -1,14 +1,13 @@
-import builder.DepartmentBuilder;
-import factory.*;
-import prototype.Circle;
-import singelton.DBHelper;
-import sun.security.pkcs11.Secmod;
+package Lesson3;
 
-import java.util.Date;
+import Lesson3.builder.DepartmentBuilder;
+import Lesson3.factory.*;
+import Lesson3.prototype.Circle;
+import Lesson3.singelton.DBHelper;
 
 public class Main {
     public static void main(String[] args) throws CloneNotSupportedException {
-        //Test singelton
+        //Test Lesson3.singelton
         DBHelper dbHelper = DBHelper.getInstance();
         System.out.println(dbHelper);
         dbHelper.setCount(1);
@@ -16,7 +15,7 @@ public class Main {
         System.out.println(dbHelper);
 
 
-        //Test builder
+        //Test Lesson3.builder
         DepartmentBuilder departmentBuilder = new DepartmentBuilder("Managers");
         System.out.println(departmentBuilder.count(5).general(true).build());
 
@@ -26,7 +25,7 @@ public class Main {
         System.out.println(circle);
         System.out.println(circleGrin);
 
-        //factory
+        //Lesson3.factory
         FactoryMeat factoryMeat = CreaterorFactory.getFactoryMeat();
         FactoryCoctail factryCoctail = CreaterorFactory.getFactoryCoctail();
 
