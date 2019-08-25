@@ -1,4 +1,5 @@
 package Lesson4.composite;
 
-public interface Draw {
+public interface Shape {
+    void draw();
 }
