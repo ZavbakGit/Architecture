@@ -1,30 +1,38 @@
 package dao;
 
-import model.intity.User;
+import model.intity.Mounth;
 
-import java.sql.*;
 
-public class UsersDao {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
-   private static UsersDao instance;
+
+public class MonthDao {
+
+    private static MonthDao instance;
 
     private static Connection connection;
 
+    private HashMap<Integer, Mounth> monthMap = new HashMap<>();
 
-    private static final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
-    private static final String INSERT = "INSERT INTO users(id, name, phone) VALUES(?,?,?)";
+
+    private static final String FIND_BY_ID = "SELECT * FROM month_ WHERE id = ?";
+    private static final String INSERT = "INSERT INTO month_(id, name) VALUES(?,?)";
     private static final String CREATE_TABLE =
-            "CREATE TABLE if not exists 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text, 'phone' INT);";
+            "CREATE TABLE if not exists 'month_' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text);";
 
 
-    public static UsersDao getInstance(Connection connection) throws SQLException, ClassNotFoundException {
-        if (instance == null){
-            instance = new UsersDao(connection);
+    public static MonthDao getInstance(Connection connection) throws SQLException, ClassNotFoundException {
+        if (instance == null) {
+            instance = new MonthDao(connection);
         }
         return instance;
     }
 
-    public UsersDao(Connection connection) throws SQLException, ClassNotFoundException {
+    public MonthDao(Connection connection) throws SQLException, ClassNotFoundException {
         this.connection = connection;
         createDB();
     }
@@ -37,26 +45,35 @@ public class UsersDao {
     }
 
 
-    public void insert(User user)throws SQLException{
+    public void insert(Mounth mounth) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
-            statement.setInt(1, user.getId());
-            statement.setString(2, user.getName());
-            statement.setString(3, user.getPhone());
+            statement.setInt(1, mounth.getId());
+            statement.setString(2, mounth.getName());
             statement.executeUpdate();
         }
     }
 
-    public User getUserById(int id) throws SQLException {
+    public Mounth getUserById(int id) throws SQLException {
+
+        if (monthMap.containsKey(id)) {
+            System.out.println("got by cash!");
+            return monthMap.get(id);
+        }
+
+
         try (PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
             statement.setInt(1, id);
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs != null && rs.next()) {
 
 
-                    return new User(
+                    Mounth mounth =  new Mounth(
                             rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getString("phone"));
+                            rs.getString("name"));
+
+                    monthMap.put(mounth.getId(), mounth);
+
+                    return mounth;
 
                 }
             }
